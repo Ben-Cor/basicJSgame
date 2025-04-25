@@ -33,7 +33,7 @@ const chest = {
   isOpen: false,
   isLocked: false,
   position: {
-      x: 10,
+      x: 12,
       y: 5,
   },
   openChest: function() {
@@ -57,12 +57,10 @@ const ctx = canvas.getContext('2d');
 
 canvas.width = 800;
 canvas.height = 600;
-canvas.style.border = '1px solid black';
-ctx.fillStyle = 'lightblue'; // Background color
 
 function drawChest () {
   if (!chest.isOpen) {
-    ctx.fillStyle = 'brown'; // Chest color
+    ctx.fillStyle = '#6d5e54'; // Chest color
     ctx.fillRect(chest.position.x * 50, chest.position.y * 50, 40, 30); // Draw chest as a rectangle
     ctx.strokeStyle = 'black'; // Outline color
     ctx.strokeRect(chest.position.x * 50, chest.position.y * 50, 40, 30); // Outline the chest
@@ -73,3 +71,7 @@ function drawChest () {
       ctx.strokeRect(chest.position.x * 50, chest.position.y * 50, 40, 30);
   }
 }
+
+
+
+drawChest();
