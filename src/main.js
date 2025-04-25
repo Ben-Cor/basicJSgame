@@ -51,3 +51,25 @@ const chest = {
       }
   }
 }
+
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = 800;
+canvas.height = 600;
+canvas.style.border = '1px solid black';
+ctx.fillStyle = 'lightblue'; // Background color
+
+function drawChest () {
+  if (!chest.isOpen) {
+    ctx.fillStyle = 'brown'; // Chest color
+    ctx.fillRect(chest.position.x * 50, chest.position.y * 50, 40, 30); // Draw chest as a rectangle
+    ctx.strokeStyle = 'black'; // Outline color
+    ctx.strokeRect(chest.position.x * 50, chest.position.y * 50, 40, 30); // Outline the chest
+  } else {
+      ctx.fillStyle = 'gold'; // Open chest color
+      ctx.fillRect(chest.position.x * 50, chest.position.y * 50, 40, 30);
+      ctx.strokeStyle = 'black';
+      ctx.strokeRect(chest.position.x * 50, chest.position.y * 50, 40, 30);
+  }
+}
