@@ -7,21 +7,21 @@ const character = {
   isDead: false,
   coins: 0,
   position: {
-      x: 0,
-      y: 0,
+      x: 10,
+      y: 10,
   },
   move: function(direction) {
       if (direction === 'up') {
-          this.position.y += 1;
+          this.position.y -= 5;
       }
       else if (direction === 'down') {
-          this.position.y -= 1;
+          this.position.y += 5;
       }
       else if (direction === 'left') {
-          this.position.x -= 1;
+          this.position.x -= 5;
       }
       else if (direction === 'right') {
-          this.position.x += 1;
+          this.position.x += 5;
       }
   },
   hasKey: true,
@@ -33,8 +33,8 @@ const chest = {
   isOpen: false,
   isLocked: false,
   position: {
-      x: 12,
-      y: 5,
+      x: 120,
+      y: 50,
   },
   openChest: function() {
      if (character.position === this.position) {
@@ -61,17 +61,43 @@ canvas.height = 600;
 function drawChest () {
   if (!chest.isOpen) {
     ctx.fillStyle = '#6d5e54'; // Chest color
-    ctx.fillRect(chest.position.x * 50, chest.position.y * 50, 40, 30); // Draw chest as a rectangle
+    ctx.fillRect(chest.position.x * 5, chest.position.y * 5, 40, 30); // Draw chest as a rectangle
     ctx.strokeStyle = 'black'; // Outline color
-    ctx.strokeRect(chest.position.x * 50, chest.position.y * 50, 40, 30); // Outline the chest
+    ctx.strokeRect(chest.position.x * 5, chest.position.y * 5, 40, 30); // Outline the chest
   } else {
       ctx.fillStyle = 'gold'; // Open chest color
-      ctx.fillRect(chest.position.x * 50, chest.position.y * 50, 40, 30);
+      ctx.fillRect(chest.position.x * 5, chest.position.y * 5, 40, 30);
       ctx.strokeStyle = 'black';
-      ctx.strokeRect(chest.position.x * 50, chest.position.y * 50, 40, 30);
+      ctx.strokeRect(chest.position.x * 5, chest.position.y * 5, 40, 30);
   }
 }
 
-
+function drawCharacter() {
+  ctx.fillStyle = '#ffcc00'; // Character color
+  ctx.fillRect(character.position.x * 5, character.position.y * 5, 40, 40); // Draw character as a rectangle
+  ctx.strokeStyle = 'black'; // Outline color
+  ctx.strokeRect(character.position.x * 5, character.position.y * 5, 40, 40); // Outline the character
+  ctx.fillStyle = 'black'; // Eye color
+}
 
 drawChest();
+drawCharacter();
+
+function moveCharacter(direction) {
+  document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowUp') {
+          character.move('up');
+      } else if (event.key === 'ArrowDown') {
+          character.move('down');
+      } else if (event.key === 'ArrowLeft') {
+          character.move('left');
+      } else if (event.key === 'ArrowRight') {
+          character.move('right');
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+      drawChest();
+      drawCharacter();
+  });
+}
+
+moveCharacter();
