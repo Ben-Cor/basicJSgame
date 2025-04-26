@@ -20,9 +20,9 @@ export default class Chest {
              }
          }
      }
-     
-     drawChest () {
-        if (!chest.isOpen) {
+
+     drawChest (ctx) {
+        if (!this.isOpen) {
           ctx.fillStyle = '#6d5e54'; // Chest color
           ctx.fillRect(this.position.x * 5, this.position.y * 5, 40, 30); // Draw chest as a rectangle
           ctx.strokeStyle = 'black'; // Outline color

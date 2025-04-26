@@ -35,10 +35,8 @@ const chest1 = new Chest(5, false, false, { x: 120, y: 50 });
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-
 canvas.width = 800;
 canvas.height = 600;
-
 
 
 function drawCharacter() {
@@ -49,8 +47,8 @@ function drawCharacter() {
   ctx.fillStyle = 'black'; // Eye color
 }
 
-chest1.drawChest();
 drawCharacter();
+chest1.drawChest(ctx);
 
 function moveCharacter(direction) {
   document.addEventListener('keydown', (event) => {
@@ -64,7 +62,7 @@ function moveCharacter(direction) {
           character.move('right');
       }
       ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-      drawChest();
+      chest1.drawChest(ctx);
       drawCharacter();
   });
 }
