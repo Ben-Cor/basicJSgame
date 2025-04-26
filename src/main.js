@@ -1,4 +1,5 @@
 import './style.css'
+import Chest from './models/chest'; 
 
 const character = {
   hairColor: "brown",
@@ -28,55 +29,9 @@ const character = {
   inventory: ['sword', 'shield', 'hat', 'potion'],
 }
 
-// Chest object class
-const Chest = {
-    constructor(coins, isOpen, isLocked, position) {
-        this.coins = coins;
-        this.isOpen = isOpen;
-        this.isLocked = isLocked;
-        this.position = position;
-    },
-    
-    openChest() {
-        if (character.position === this.position) {
-             if (this.isLocked && !character.hasKey) {
-                 console.log("The chest is locked.");
-             } else if (this.isLocked && character.hasKey) {
-                 console.log("You unlocked the chest with the key!");
-             } else {
-                 this.isOpen = true;
-                 character.coins += this.coins;
-                 this.coins = 0;
-                 console.log("You opened the chest and found " + this.coins + " coins!");
-             }
-         }
-     },
-     drawChest () {
-        if (!chest.isOpen) {
-          ctx.fillStyle = '#6d5e54'; // Chest color
-          ctx.fillRect(this.position.x * 5, this.position.y * 5, 40, 30); // Draw chest as a rectangle
-          ctx.strokeStyle = 'black'; // Outline color
-          ctx.strokeRect(this.position.x * 5, this.position.y * 5, 40, 30); // Outline the chest
-        } else {
-            ctx.fillStyle = 'gold'; // Open chest color
-            ctx.fillRect(this.position.x * 5, this.position.y * 5, 40, 30);
-            ctx.strokeStyle = 'black';
-            ctx.strokeRect(this.position.x * 5, this.position.y * 5, 40, 30);
-        }
-      }
-}
-
 
 // Create a new chest object
-const chest1 = {
-  coins: 5,
-  isOpen: false,
-  isLocked: false,
-  position: {
-      x: 120,
-      y: 50,
-  }
-}
+const chest1 = new Chest(5, false, false, { x: 120, y: 50 });
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
