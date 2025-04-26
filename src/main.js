@@ -28,6 +28,7 @@ const character = {
   inventory: ['sword', 'shield', 'hat', 'potion'],
 }
 
+// Chest object class
 const Chest = {
     constructor(coins, isOpen, isLocked, position) {
         this.coins = coins;
@@ -49,9 +50,24 @@ const Chest = {
                  console.log("You opened the chest and found " + this.coins + " coins!");
              }
          }
-     }
+     },
+     drawChest () {
+        if (!chest.isOpen) {
+          ctx.fillStyle = '#6d5e54'; // Chest color
+          ctx.fillRect(this.position.x * 5, this.position.y * 5, 40, 30); // Draw chest as a rectangle
+          ctx.strokeStyle = 'black'; // Outline color
+          ctx.strokeRect(this.position.x * 5, this.position.y * 5, 40, 30); // Outline the chest
+        } else {
+            ctx.fillStyle = 'gold'; // Open chest color
+            ctx.fillRect(this.position.x * 5, this.position.y * 5, 40, 30);
+            ctx.strokeStyle = 'black';
+            ctx.strokeRect(this.position.x * 5, this.position.y * 5, 40, 30);
+        }
+      }
 }
 
+
+// Create a new chest object
 const chest1 = {
   coins: 5,
   isOpen: false,
@@ -68,19 +84,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 600;
 
-function drawChest () {
-  if (!chest.isOpen) {
-    ctx.fillStyle = '#6d5e54'; // Chest color
-    ctx.fillRect(chest.position.x * 5, chest.position.y * 5, 40, 30); // Draw chest as a rectangle
-    ctx.strokeStyle = 'black'; // Outline color
-    ctx.strokeRect(chest.position.x * 5, chest.position.y * 5, 40, 30); // Outline the chest
-  } else {
-      ctx.fillStyle = 'gold'; // Open chest color
-      ctx.fillRect(chest.position.x * 5, chest.position.y * 5, 40, 30);
-      ctx.strokeStyle = 'black';
-      ctx.strokeRect(chest.position.x * 5, chest.position.y * 5, 40, 30);
-  }
-}
+
 
 function drawCharacter() {
   ctx.fillStyle = '#ffcc00'; // Character color
@@ -90,7 +94,7 @@ function drawCharacter() {
   ctx.fillStyle = 'black'; // Eye color
 }
 
-drawChest();
+chest1.drawChest();
 drawCharacter();
 
 function moveCharacter(direction) {
